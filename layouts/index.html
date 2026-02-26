@@ -11,33 +11,52 @@
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); 
             min-height: 100vh; 
             color: #fff;
+            line-height: 1.6;
         }
         .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
         
         .header { 
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-            padding: 40px; 
+            padding: 60px 40px; 
             border-radius: 20px; 
             margin-bottom: 40px; 
             text-align: center;
             box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
         }
-        .header h1 { font-size: 2.5em; margin-bottom: 15px; }
-        .header p { font-size: 1.2em; opacity: 0.9; }
+        .header h1 { 
+            font-size: 3em; 
+            margin-bottom: 15px; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .header p { 
+            font-size: 1.3em; 
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
         
         /* 标签导航 */
+        .tag-section {
+            margin-bottom: 40px;
+        }
+        .tag-section h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 4px solid #e94560;
+        }
         .tag-nav { 
             display: flex; 
             flex-wrap: wrap; 
             gap: 12px; 
-            margin-bottom: 30px;
-            padding: 20px;
+            padding: 25px;
             background: rgba(255,255,255,0.05);
             border-radius: 16px;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         .tag-btn { 
-            padding: 10px 20px; 
+            padding: 12px 24px; 
             border-radius: 25px; 
             background: rgba(255,255,255,0.1);
             color: #fff;
@@ -45,37 +64,49 @@
             transition: all 0.3s;
             border: 1px solid rgba(255,255,255,0.2);
             cursor: pointer;
+            font-size: 0.95em;
         }
         .tag-btn:hover, .tag-btn.active { 
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
         
         /* 文章列表 */
-        .post-list { display: grid; gap: 20px; }
+        .posts-section h2 {
+            font-size: 1.5em;
+            margin-bottom: 25px;
+            padding-left: 15px;
+            border-left: 4px solid #e94560;
+        }
+        .post-list { 
+            display: grid; 
+            gap: 25px; 
+        }
         
         .post-card { 
-            background: rgba(255,255,255,0.1); 
+            background: rgba(255,255,255,0.08); 
             backdrop-filter: blur(10px);
             border-radius: 16px; 
-            padding: 24px; 
+            padding: 30px; 
             transition: all 0.3s;
             border: 1px solid rgba(255,255,255,0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 20px;
         }
         .post-card:hover { 
             transform: translateY(-3px); 
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.12);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         
         .post-info { flex: 1; }
         .post-title { 
-            font-size: 1.3em; 
+            font-size: 1.4em; 
             font-weight: bold; 
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
         .post-title a { 
             color: #fff; 
@@ -85,9 +116,9 @@
         .post-title a:hover { color: #e94560; }
         
         .post-meta { 
-            font-size: 0.9em; 
+            font-size: 0.95em; 
             color: rgba(255,255,255,0.7);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         
         .post-tags { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -95,19 +126,20 @@
             display: inline-block; 
             background: rgba(233, 69, 96, 0.3); 
             color: #fff; 
-            padding: 4px 12px; 
+            padding: 5px 14px; 
             border-radius: 15px; 
-            font-size: 0.8em; 
+            font-size: 0.85em; 
         }
         
         .read-more {
-            padding: 10px 20px;
+            padding: 12px 28px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #fff;
             text-decoration: none;
             border-radius: 25px;
             transition: all 0.3s;
             white-space: nowrap;
+            font-weight: 500;
         }
         .read-more:hover {
             transform: scale(1.05);
@@ -116,20 +148,33 @@
         
         .footer { 
             text-align: center; 
-            padding: 40px; 
+            padding: 50px; 
             margin-top: 60px;
             color: rgba(255,255,255,0.6);
             border-top: 1px solid rgba(255,255,255,0.1);
         }
         
         @media (max-width: 768px) {
-            .header h1 { font-size: 1.8em; }
+            .header { padding: 40px 25px; }
+            .header h1 { font-size: 2em; }
+            .header p { font-size: 1.1em; }
             .post-card { 
                 flex-direction: column; 
                 align-items: flex-start;
-                gap: 15px;
+                gap: 20px;
+                padding: 25px;
             }
-            .read-more { align-self: stretch; text-align: center; }
+            .read-more { 
+                align-self: stretch; 
+                text-align: center; 
+            }
+            .tag-nav {
+                padding: 20px;
+            }
+            .tag-btn {
+                padding: 10px 18px;
+                font-size: 0.9em;
+            }
         }
     </style>
 </head>
@@ -141,34 +186,40 @@
         </div>
 
         <!-- 标签导航 -->
-        <div class="tag-nav">
-            <a href="#all" class="tag-btn active" onclick="filterPosts('all')">全部文章</a>
-            {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
-            <a href="#{{ $name }}" class="tag-btn" onclick="filterPosts('{{ $name }}')">{{ $name }}</a>
-            {{ end }}
+        <div class="tag-section">
+            <h2>🏷️ 标签筛选</h2>
+            <div class="tag-nav">
+                <a href="#all" class="tag-btn active" onclick="filterPosts('all')">全部文章</a>
+                {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+                <a href="#{{ $name }}" class="tag-btn" onclick="filterPosts('{{ $name }}')">{{ $name }}</a>
+                {{ end }}
+            </div>
         </div>
         
         <!-- 文章列表 -->
-        <div class="post-list" id="postList">
-            {{ range .Site.RegularPages }}
-            <article class="post-card" data-tags="{{ range .Params.tags }}{{ . }} {{ end }}">
-                <div class="post-info">
-                    <h3 class="post-title">
-                        <a href="{{ .Permalink }}">{{ .Title }}</a>
-                    </h3>
-                    <div class="post-meta">
-                        📅 {{ .Date.Format "2006年1月2日" }} | 
-                        🏷️ {{ range .Params.categories }}{{ . }}{{ end }}
+        <div class="posts-section">
+            <h2>📚 文章列表</h2>
+            <div class="post-list" id="postList">
+                {{ range .Site.RegularPages }}
+                <article class="post-card" data-tags="{{ range .Params.tags }}{{ . }} {{ end }}">
+                    <div class="post-info">
+                        <h3 class="post-title">
+                            <a href="{{ .Permalink }}">{{ .Title }}</a>
+                        </h3>
+                        <div class="post-meta">
+                            📅 {{ .Date.Format "2006年1月2日" }} | 
+                            🏷️ {{ range .Params.categories }}{{ . }}{{ end }}
+                        </div>
+                        <div class="post-tags">
+                            {{ range .Params.tags }}
+                            <span class="tag">{{ . }}</span>
+                            {{ end }}
+                        </div>
                     </div>
-                    <div class="post-tags">
-                        {{ range .Params.tags }}
-                        <span class="tag">{{ . }}</span>
-                        {{ end }}
-                    </div>
-                </div>
-                <a href="{{ .Permalink }}" class="read-more">阅读全文 →</a>
-            </article>
-            {{ end }}
+                    <a href="{{ .Permalink }}" class="read-more">阅读全文 →</a>
+                </article>
+                {{ end }}
+            </div>
         </div>
 
         <div class="footer">
