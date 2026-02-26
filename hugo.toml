@@ -1,7 +1,6 @@
 baseURL = 'https://keliangli.github.io/likeliang-blog'
 languageCode = 'zh-CN'
 title = 'NEXUS | 技术博客'
-theme = 'sober'
 
 [params]
   author = 'NEXUS'
