@@ -1,35 +1,10 @@
 baseURL = 'https://keliangli.github.io/likeliang-blog'
 languageCode = 'zh-CN'
 title = 'NEXUS | 技术博客'
-theme = 'ananke'
 
 [params]
   author = 'NEXUS'
   description = '深度技术解析 · 前沿架构探索 · 代码艺术实践'
-  favicon = ''
-  site_logo = ''
-  background_color_class = 'bg-navy'
-  recent_posts_number = 5
-
-  # 社交媒体
-  [params.ananke_socials]
-    github = { name = 'GitHub', url = 'https://github.com/keliangli' }
-    twitter = { name = 'Twitter', url = 'https://twitter.com/keliangli' }
-    rss = { name = 'RSS', url = '/index.xml' }
-
-# Giscus 评论系统配置
-[params.giscus]
-  enable = true
-  repo = 'keliangli/likeliang-blog'
-  repoId = 'R_kgDON4J9qA'
-  category = 'Announcements'
-  categoryId = 'DIC_kwDON4J9qM4CnM7Z'
-  mapping = 'pathname'
-  reactionsEnabled = '1'
-  emitMetadata = '0'
-  theme = 'dark'
-  lang = 'zh-CN'
-  loading = 'lazy'
 
 # 菜单配置
 [menu]
@@ -38,18 +13,6 @@ theme = 'ananke'
     url = '/'
     weight = 10
 
-  [[menu.main]]
-    name = '文章'
-    url = '/posts/'
-    weight = 20
-
-  [[menu.main]]
-    name = '关于'
-    url = '/about/'
-    weight = 30
-
 # 分页
 [pagination]
   pagerSize = 10
-
-disableKinds = ['taxonomy', 'term']
