@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on NEXUS | 技术博客</title>
+    <link>http://localhost:1313/likeliang-blog/categories/</link>
+    <description>Recent content in Categories on NEXUS | 技术博客</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 26 Feb 2026 11:14:21 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/likeliang-blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>架构设计</title>
+      <link>http://localhost:1313/likeliang-blog/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</link>
+      <pubDate>Thu, 26 Feb 2026 11:14:21 +0800</pubDate>
+      <guid>http://localhost:1313/likeliang-blog/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
