@@ -25,34 +25,57 @@
         .header h1 { font-size: 2.5em; margin-bottom: 15px; }
         .header p { font-size: 1.2em; opacity: 0.9; }
         
-        .section-title { 
-            font-size: 1.8em; 
-            margin-bottom: 30px; 
-            padding-left: 15px; 
-            border-left: 5px solid #e94560;
+        /* 标签导航 */
+        .tag-nav { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 12px; 
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }
+        .tag-btn { 
+            padding: 10px 20px; 
+            border-radius: 25px; 
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+        }
+        .tag-btn:hover, .tag-btn.active { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: translateY(-2px);
         }
         
-        .post-list { display: grid; gap: 25px; }
+        /* 文章列表 */
+        .post-list { display: grid; gap: 20px; }
         
         .post-card { 
             background: rgba(255,255,255,0.1); 
             backdrop-filter: blur(10px);
             border-radius: 16px; 
-            padding: 28px; 
+            padding: 24px; 
             transition: all 0.3s;
             border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .post-card:hover { 
-            transform: translateY(-5px); 
+            transform: translateY(-3px); 
             background: rgba(255,255,255,0.15);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         
+        .post-info { flex: 1; }
         .post-title { 
-            font-size: 1.4em; 
+            font-size: 1.3em; 
             font-weight: bold; 
-            margin-bottom: 12px;
-            color: #fff;
+            margin-bottom: 8px;
         }
         .post-title a { 
             color: #fff; 
@@ -64,15 +87,10 @@
         .post-meta { 
             font-size: 0.9em; 
             color: rgba(255,255,255,0.7);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         
-        .post-summary { 
-            color: rgba(255,255,255,0.8);
-            line-height: 1.7;
-        }
-        
-        .post-tags { margin-top: 15px; }
+        .post-tags { display: flex; gap: 8px; flex-wrap: wrap; }
         .tag { 
             display: inline-block; 
             background: rgba(233, 69, 96, 0.3); 
@@ -80,7 +98,20 @@
             padding: 4px 12px; 
             border-radius: 15px; 
             font-size: 0.8em; 
-            margin-right: 8px;
+        }
+        
+        .read-more {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .read-more:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
         }
         
         .footer { 
@@ -93,7 +124,12 @@
         
         @media (max-width: 768px) {
             .header h1 { font-size: 1.8em; }
-            .post-card { padding: 20px; }
+            .post-card { 
+                flex-direction: column; 
+                align-items: flex-start;
+                gap: 15px;
+            }
+            .read-more { align-self: stretch; text-align: center; }
         }
     </style>
 </head>
@@ -104,26 +140,33 @@
             <p>{{ .Site.Params.description }}</p>
         </div>
 
-        <h2 class="section-title">📚 文章列表</h2>
+        <!-- 标签导航 -->
+        <div class="tag-nav">
+            <a href="#all" class="tag-btn active" onclick="filterPosts('all')">全部文章</a>
+            {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+            <a href="#{{ $name }}" class="tag-btn" onclick="filterPosts('{{ $name }}')">{{ $name }}</a>
+            {{ end }}
+        </div>
         
-        <div class="post-list">
+        <!-- 文章列表 -->
+        <div class="post-list" id="postList">
             {{ range .Site.RegularPages }}
-            <article class="post-card">
-                <h3 class="post-title">
-                    <a href="{{ .Permalink }}">{{ .Title }}</a>
-                </h3>
-                <div class="post-meta">
-                    📅 {{ .Date.Format "2006年1月2日" }} | 
-                    🏷️ {{ range .Params.categories }}{{ . }}{{ end }}
+            <article class="post-card" data-tags="{{ range .Params.tags }}{{ . }} {{ end }}">
+                <div class="post-info">
+                    <h3 class="post-title">
+                        <a href="{{ .Permalink }}">{{ .Title }}</a>
+                    </h3>
+                    <div class="post-meta">
+                        📅 {{ .Date.Format "2006年1月2日" }} | 
+                        🏷️ {{ range .Params.categories }}{{ . }}{{ end }}
+                    </div>
+                    <div class="post-tags">
+                        {{ range .Params.tags }}
+                        <span class="tag">{{ . }}</span>
+                        {{ end }}
+                    </div>
                 </div>
-                <p class="post-summary">{{ .Summary }}</p>
-                {{ if .Params.tags }}
-                <div class="post-tags">
-                    {{ range .Params.tags }}
-                    <span class="tag">{{ . }}</span>
-                    {{ end }}
-                </div>
-                {{ end }}
+                <a href="{{ .Permalink }}" class="read-more">阅读全文 →</a>
             </article>
             {{ end }}
         </div>
@@ -132,5 +175,34 @@
             <p>&copy; {{ now.Year }} {{ .Site.Title }}. All rights reserved.</p>
         </div>
     </div>
+
+    <script>
+        function filterPosts(tag) {
+            const posts = document.querySelectorAll('.post-card');
+            const buttons = document.querySelectorAll('.tag-btn');
+            
+            // 更新按钮状态
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('href') === '#' + tag) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // 过滤文章
+            posts.forEach(post => {
+                if (tag === 'all') {
+                    post.style.display = 'flex';
+                } else {
+                    const postTags = post.getAttribute('data-tags');
+                    if (postTags && postTags.includes(tag)) {
+                        post.style.display = 'flex';
+                    } else {
+                        post.style.display = 'none';
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 </html>
