@@ -4,202 +4,336 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ .Site.Title }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a24;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --accent-primary: #6366f1;
+            --accent-secondary: #8b5cf6;
+            --accent-tertiary: #06b6d4;
+            --accent-warm: #f59e0b;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(255, 255, 255, 0.12);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', sans-serif; 
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); 
-            min-height: 100vh; 
-            color: #fff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
-        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
-        
-        .header { 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-            padding: 60px 40px; 
-            border-radius: 20px; 
-            margin-bottom: 40px; 
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
         }
-        .header h1 { 
-            font-size: 3em; 
-            margin-bottom: 15px; 
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-        .header p { 
-            font-size: 1.3em; 
-            opacity: 0.95;
-            max-width: 600px;
+
+        .container {
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 60px 40px;
+            position: relative;
+            z-index: 1;
         }
-        
-        /* 标签导航 */
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 32px;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        /* Tag Navigation */
         .tag-section {
-            margin-bottom: 40px;
+            margin-bottom: 60px;
         }
-        .tag-section h2 {
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            padding-left: 15px;
-            border-left: 4px solid #e94560;
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
         }
-        .tag-nav { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 12px; 
-            padding: 25px;
-            background: rgba(255,255,255,0.05);
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .tag-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
             border-radius: 16px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
         }
-        .tag-btn { 
-            padding: 12px 24px; 
-            border-radius: 25px; 
-            background: rgba(255,255,255,0.1);
-            color: #fff;
+
+        .tag-btn {
+            padding: 10px 20px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 100px;
+            color: var(--text-secondary);
             text-decoration: none;
-            transition: all 0.3s;
-            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.875rem;
+            font-weight: 500;
             cursor: pointer;
-            font-size: 0.95em;
+            transition: all 0.3s ease;
         }
-        .tag-btn:hover, .tag-btn.active { 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+        .tag-btn:hover, .tag-btn.active {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-color: transparent;
+            color: white;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
-        
-        /* 文章列表 */
-        .posts-section h2 {
-            font-size: 1.5em;
-            margin-bottom: 25px;
-            padding-left: 15px;
-            border-left: 4px solid #e94560;
+
+        /* Posts Section */
+        .posts-section {
+            margin-bottom: 60px;
         }
-        .post-list { 
-            display: grid; 
-            gap: 25px; 
+
+        .posts-grid {
+            display: grid;
+            gap: 20px;
         }
-        
-        .post-card { 
-            background: rgba(255,255,255,0.08); 
-            backdrop-filter: blur(10px);
-            border-radius: 16px; 
-            padding: 30px; 
-            transition: all 0.3s;
-            border: 1px solid rgba(255,255,255,0.1);
+
+        .post-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 20px;
+            gap: 24px;
         }
-        .post-card:hover { 
-            transform: translateY(-3px); 
-            background: rgba(255,255,255,0.12);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+
+        .post-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-        
-        .post-info { flex: 1; }
-        .post-title { 
-            font-size: 1.4em; 
-            font-weight: bold; 
+
+        .post-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .post-card:hover::before {
+            opacity: 1;
+        }
+
+        .post-info {
+            flex: 1;
+        }
+
+        .post-title {
+            font-size: 1.25rem;
+            font-weight: 600;
             margin-bottom: 12px;
         }
-        .post-title a { 
-            color: #fff; 
+
+        .post-title a {
+            color: var(--text-primary);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: color 0.2s ease;
         }
-        .post-title a:hover { color: #e94560; }
-        
-        .post-meta { 
-            font-size: 0.95em; 
-            color: rgba(255,255,255,0.7);
+
+        .post-title a:hover {
+            color: var(--accent-primary);
+        }
+
+        .post-meta {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
             margin-bottom: 12px;
         }
-        
-        .post-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-        .tag { 
-            display: inline-block; 
-            background: rgba(233, 69, 96, 0.3); 
-            color: #fff; 
-            padding: 5px 14px; 
-            border-radius: 15px; 
-            font-size: 0.85em; 
+
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }
-        
-        .read-more {
-            padding: 12px 28px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 25px;
-            transition: all 0.3s;
-            white-space: nowrap;
+
+        .tag {
+            padding: 4px 10px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            font-size: 0.75rem;
             font-weight: 500;
+            color: var(--text-secondary);
         }
+
+        .read-more {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
         .read-more:hover {
             transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4);
         }
-        
-        .footer { 
-            text-align: center; 
-            padding: 50px; 
-            margin-top: 60px;
-            color: rgba(255,255,255,0.6);
-            border-top: 1px solid rgba(255,255,255,0.1);
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 60px 0;
+            border-top: 1px solid var(--border-subtle);
         }
-        
+
+        .footer-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .footer p {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+        }
+
         @media (max-width: 768px) {
-            .header { padding: 40px 25px; }
-            .header h1 { font-size: 2em; }
-            .header p { font-size: 1.1em; }
-            .post-card { 
-                flex-direction: column; 
+            .container { padding: 40px 24px; }
+            .header h1 { font-size: 2.5rem; }
+            .post-card {
+                flex-direction: column;
                 align-items: flex-start;
-                gap: 20px;
-                padding: 25px;
             }
-            .read-more { 
-                align-self: stretch; 
-                text-align: center; 
-            }
-            .tag-nav {
-                padding: 20px;
-            }
-            .tag-btn {
-                padding: 10px 18px;
-                font-size: 0.9em;
+            .read-more {
+                align-self: stretch;
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
+        <header class="header">
+            <div class="header-badge">
+                技术博客
+            </div>
             <h1>{{ .Site.Title }}</h1>
-            <p>{{ .Site.Params.description }}</p>
-        </div>
+            <p class="header-subtitle">{{ .Site.Params.description }}</p>
+        </header>
 
-        <!-- 标签导航 -->
-        <div class="tag-section">
-            <h2>🏷️ 标签筛选</h2>
+        <section class="tag-section">
+            <div class="section-header">
+                <div class="section-icon">🏷️</div>
+                <h2 class="section-title">标签筛选</h2>
+            </div>
             <div class="tag-nav">
                 <a href="#all" class="tag-btn active" onclick="filterPosts('all')">全部文章</a>
                 {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
                 <a href="#{{ $name }}" class="tag-btn" onclick="filterPosts('{{ $name }}')">{{ $name }}</a>
                 {{ end }}
             </div>
-        </div>
-        
-        <!-- 文章列表 -->
-        <div class="posts-section">
-            <h2>📚 文章列表</h2>
-            <div class="post-list" id="postList">
+        </section>
+
+        <section class="posts-section">
+            <div class="section-header">
+                <div class="section-icon">📚</div>
+                <h2 class="section-title">文章列表</h2>
+            </div>
+            <div class="posts-grid" id="postList">
                 {{ range .Site.RegularPages }}
                 <article class="post-card" data-tags="{{ range .Params.tags }}{{ . }} {{ end }}">
                     <div class="post-info">
@@ -207,8 +341,7 @@
                             <a href="{{ .Permalink }}">{{ .Title }}</a>
                         </h3>
                         <div class="post-meta">
-                            📅 {{ .Date.Format "2006年1月2日" }} | 
-                            🏷️ {{ range .Params.categories }}{{ . }}{{ end }}
+                            📅 {{ .Date.Format "2006年1月2日" }} | 🏷️ {{ range .Params.categories }}{{ . }}{{ end }}
                         </div>
                         <div class="post-tags">
                             {{ range .Params.tags }}
@@ -220,11 +353,12 @@
                 </article>
                 {{ end }}
             </div>
-        </div>
+        </section>
 
-        <div class="footer">
+        <footer class="footer">
+            <div class="footer-logo">{{ .Site.Title }}</div>
             <p>&copy; {{ now.Year }} {{ .Site.Title }}. All rights reserved.</p>
-        </div>
+        </footer>
     </div>
 
     <script>
@@ -232,7 +366,6 @@
             const posts = document.querySelectorAll('.post-card');
             const buttons = document.querySelectorAll('.tag-btn');
             
-            // 更新按钮状态
             buttons.forEach(btn => {
                 btn.classList.remove('active');
                 if (btn.getAttribute('href') === '#' + tag) {
@@ -240,7 +373,6 @@
                 }
             });
             
-            // 过滤文章
             posts.forEach(post => {
                 if (tag === 'all') {
                     post.style.display = 'flex';
