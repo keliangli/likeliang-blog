@@ -1,9 +1,11 @@
-<!-- 自定义CSS -->
+<!-- 自定义CSS - 优化排版和信息密度 -->
 <style>
-  /* 深色主题增强 */
+  /* 基础样式优化 - 减小字体，增加密度 */
   body {
     background-color: #0a0a0f;
     color: #e0e0e0;
+    font-size: 14px;
+    line-height: 1.6;
   }
   
   .bg-near-black {
@@ -21,148 +23,235 @@
     text-decoration: none;
   }
   
-  /* 标题样式 */
-  h1, h2, h3, h4, h5, h6 {
+  /* 标题样式 - 减小字号 */
+  h1 {
+    font-size: 1.8rem;
     color: #ffffff;
     font-family: 'Segoe UI', system-ui, sans-serif;
+    margin-bottom: 0.8rem;
+  }
+  
+  h2 {
+    font-size: 1.4rem;
+    color: #ffffff;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    margin-top: 1.5rem;
+    margin-bottom: 0.6rem;
+    border-bottom: 1px solid #2a2a3a;
+    padding-bottom: 0.4rem;
+  }
+  
+  h3 {
+    font-size: 1.15rem;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    margin-top: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  h4, h5, h6 {
+    font-size: 1rem;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    margin-top: 1rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  /* 段落样式 - 减小间距 */
+  p {
+    margin-bottom: 0.8rem;
+    text-align: justify;
   }
   
   /* 代码块样式 */
   pre {
     background-color: #1a1a25;
     border: 1px solid #2a2a3a;
-    border-radius: 8px;
-    padding: 1rem;
+    border-radius: 6px;
+    padding: 0.8rem;
     overflow-x: auto;
+    font-size: 0.85rem;
+    margin: 0.8rem 0;
   }
   
   code {
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
     background-color: rgba(0, 240, 255, 0.1);
     color: #00f0ff;
-    padding: 0.2rem 0.4rem;
-    border-radius: 4px;
+    padding: 0.15rem 0.3rem;
+    border-radius: 3px;
+    font-size: 0.85em;
   }
   
   pre code {
     background-color: transparent;
     color: #e0e0e0;
     padding: 0;
+    font-size: 0.85rem;
+  }
+  
+  /* 列表样式 - 减小间距 */
+  ul, ol {
+    margin-bottom: 0.8rem;
+    padding-left: 1.5rem;
+  }
+  
+  li {
+    margin-bottom: 0.3rem;
+  }
+  
+  /* 表格样式 - 紧凑 */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.8rem 0;
+    font-size: 0.9rem;
+  }
+  
+  th, td {
+    padding: 0.5rem 0.6rem;
+    border: 1px solid #2a2a3a;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #1a1a25;
+    font-weight: 600;
+    color: #00f0ff;
+  }
+  
+  tr:nth-child(even) {
+    background-color: rgba(26, 26, 37, 0.5);
   }
   
   /* 引用块样式 */
   blockquote {
     border-left: 3px solid #00f0ff;
-    background: linear-gradient(135deg, rgba(0, 240, 255, 0.05), rgba(123, 45, 255, 0.05));
-    padding: 1rem 1.5rem;
-    margin: 1.5rem 0;
-    border-radius: 0 8px 8px 0;
+    margin: 0.8rem 0;
+    padding: 0.5rem 1rem;
+    background-color: rgba(0, 240, 255, 0.05);
     font-style: italic;
   }
   
-  blockquote p {
-    margin: 0;
-    color: #ffffff;
+  /* 文章卡片样式 - 紧凑 */
+  .db {
+    margin-bottom: 1rem;
   }
   
-  /* 表格样式 */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1.5rem 0;
+  .ph3 {
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
   }
   
-  th {
-    background-color: #1a1a25;
-    color: #00f0ff;
-    padding: 0.75rem;
-    text-align: left;
-    border-bottom: 2px solid #2a2a3a;
+  .pv4 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
   }
   
-  td {
-    padding: 0.75rem;
-    border-bottom: 1px solid #2a2a3a;
+  /* 文章标题链接 */
+  .f3 {
+    font-size: 1.2rem;
   }
   
-  tr:hover {
-    background-color: rgba(0, 240, 255, 0.05);
+  .f5 {
+    font-size: 0.9rem;
+  }
+  
+  .f6 {
+    font-size: 0.8rem;
   }
   
   /* 标签样式 */
   .tag {
     display: inline-block;
-    padding: 0.25rem 0.75rem;
-    background-color: #1a1a25;
-    border: 1px solid #2a2a3a;
-    border-radius: 100px;
+    background-color: rgba(0, 240, 255, 0.1);
+    color: #00f0ff;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
     font-size: 0.75rem;
-    color: #a0a0b0;
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
-    transition: all 0.3s ease;
+    margin-right: 0.3rem;
+    margin-bottom: 0.3rem;
+    border: 1px solid rgba(0, 240, 255, 0.3);
   }
   
-  .tag:hover {
-    border-color: #00f0ff;
-    color: #00f0ff;
+  /* 分类样式 */
+  .category {
+    display: inline-block;
+    background-color: rgba(123, 45, 255, 0.1);
+    color: #7b2dff;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    margin-right: 0.4rem;
+    border: 1px solid rgba(123, 45, 255, 0.3);
   }
   
-  /* Giscus 评论区域 */
-  .giscus-comments {
-    margin-top: 3rem;
-    padding-top: 2rem;
+  /* 分隔线 */
+  hr {
+    border: none;
     border-top: 1px solid #2a2a3a;
+    margin: 1.5rem 0;
   }
   
-  /* 导航栏样式 */
-  .ananke-socials a {
-    color: #a0a0b0;
-    transition: color 0.3s ease;
+  /* 导航栏优化 */
+  nav {
+    font-size: 0.9rem;
   }
   
-  .ananke-socials a:hover {
-    color: #00f0ff;
-  }
-  
-  /* 文章列表卡片 */
-  .article-card {
-    background-color: #12121a;
-    border: 1px solid #2a2a3a;
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    transition: all 0.3s ease;
-  }
-  
-  .article-card:hover {
-    border-color: #00f0ff;
-    transform: translateY(-4px);
-    box-shadow: 0 10px 40px rgba(0, 240, 255, 0.1);
+  /* 页脚优化 */
+  footer {
+    font-size: 0.85rem;
   }
   
   /* 阅读更多按钮 */
-  .read-more {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: linear-gradient(135deg, #00f0ff, #7b2dff);
-    color: #0a0a0f;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
+  .ba {
+    border: 1px solid #00f0ff;
   }
   
-  .read-more:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(0, 240, 255, 0.3);
-    color: #0a0a0f;
+  .b--light-silver {
+    border-color: #00f0ff;
+  }
+  
+  /* 文章内容区域 */
+  .measure-wide {
+    max-width: 75ch;
+  }
+  
+  .lh-copy {
+    line-height: 1.6;
+  }
+  
+  /* 摘要文字 */
+  .nested-links {
+    font-size: 0.9rem;
+  }
+  
+  /* 首页文章列表 */
+  .flex-wrap article {
+    margin-bottom: 1rem;
+  }
+  
+  /* 响应式调整 */
+  @media (max-width: 768px) {
+    body {
+      font-size: 13px;
+    }
+    
+    h1 {
+      font-size: 1.5rem;
+    }
+    
+    h2 {
+      font-size: 1.2rem;
+    }
+    
+    h3 {
+      font-size: 1.05rem;
+    }
+    
+    .ph3 {
+      padding-left: 0.6rem;
+      padding-right: 0.6rem;
+    }
   }
 </style>
-
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
