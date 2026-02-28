@@ -1,6 +1,6 @@
 ---
 title: "GitHub 技术雷达 - 2026年2月26日 AI 热点"
-date: 2026-02-26T10:00:00+08:00
+date: 2025-02-26T10:00:00+08:00
 draft: false
 tags: ["AI", "GitHub", "技术雷达", "Agent", "推理引擎", "RAG", "强化学习"]
 categories: ["技术趋势"]
