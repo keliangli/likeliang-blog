@@ -1,6 +1,6 @@
 ---
 title: "GitHub 技术雷达 - 2026 年 2 月 28 日 AI 范式转移日"
-date: 2026-02-28T23:59:00+08:00
+date: 2026-02-28T10:00:00+08:00
 draft: false
 tags: ["AI", "GitHub", "技术雷达", "Agent", "Skills", "TypeScript", "国产模型"]
 categories: ["技术趋势"]
