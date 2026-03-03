@@ -4,387 +4,351 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ .Site.Title }}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+SC:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #12121a;
-            --bg-tertiary: #1a1a24;
-            --bg-card: rgba(255, 255, 255, 0.03);
-            --text-primary: #fafafa;
-            --text-secondary: #a1a1aa;
-            --text-muted: #71717a;
-            --accent-primary: #6366f1;
-            --accent-secondary: #8b5cf6;
-            --accent-tertiary: #06b6d4;
-            --accent-warm: #f59e0b;
-            --border-subtle: rgba(255, 255, 255, 0.06);
-            --border-hover: rgba(255, 255, 255, 0.12);
+            --bg: #f3f6f7;
+            --paper: #ffffff;
+            --paper-soft: #f8fbfb;
+            --ink: #14202b;
+            --muted: #5f7180;
+            --line: #d8e3e8;
+            --accent: #0f766e;
+            --accent-dark: #115e59;
+            --warm: #b45309;
+            --tag-bg: #e7f5f3;
+            --shadow: 0 14px 40px rgba(11, 30, 46, 0.08);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-        body { 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
+        body {
+            font-family: 'IBM Plex Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background:
+                radial-gradient(circle at 8% 12%, rgba(15, 118, 110, 0.10) 0, rgba(15, 118, 110, 0) 28%),
+                radial-gradient(circle at 92% 88%, rgba(180, 83, 9, 0.08) 0, rgba(180, 83, 9, 0) 34%),
+                var(--bg);
+            color: var(--ink);
             min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 60px 60px;
-            pointer-events: none;
-            z-index: 0;
+            line-height: 1.7;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1120px;
             margin: 0 auto;
-            padding: 60px 40px;
-            position: relative;
-            z-index: 1;
+            padding: 42px 18px 64px;
         }
 
-        /* Header */
-        .header {
-            text-align: center;
-            padding: 80px 0;
-            border-bottom: 1px solid var(--border-subtle);
-            margin-bottom: 60px;
-            position: relative;
+        .hero {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 36px 34px;
+            margin-bottom: 26px;
         }
 
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
-        }
-
-        .header-badge {
+        .hero-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 16px;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-subtle);
-            border-radius: 100px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 32px;
-        }
-
-        .header h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
+            font-size: 0.76rem;
+            color: var(--accent-dark);
+            border: 1px solid rgba(15, 118, 110, 0.25);
+            background: var(--tag-bg);
+            border-radius: 999px;
+            padding: 6px 12px;
             margin-bottom: 16px;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            letter-spacing: 0.02em;
         }
 
-        .header-subtitle {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            font-weight: 400;
+        .hero h1 {
+            font-size: clamp(1.9rem, 2.9vw, 2.8rem);
+            line-height: 1.2;
+            margin-bottom: 12px;
         }
 
-        /* Tag Navigation */
-        .tag-section {
-            margin-bottom: 60px;
+        .hero p {
+            font-size: 1rem;
+            color: var(--muted);
+            max-width: 760px;
         }
 
-        .section-header {
+        .hero-actions {
             display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
         }
 
-        .section-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        .hero-link {
+            text-decoration: none;
+            padding: 10px 14px;
             border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
+            border: 1px solid var(--line);
+            background: var(--paper-soft);
+            color: var(--ink);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
         }
 
-        .section-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-primary);
+        .hero-link.primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+
+        .hero-link:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+
+        .panel {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 18px;
+            margin-bottom: 20px;
+        }
+
+        .panel-title {
+            font-size: 0.88rem;
+            color: var(--muted);
+            margin-bottom: 12px;
         }
 
         .tag-nav {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            padding: 24px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 16px;
+            gap: 8px;
         }
 
         .tag-btn {
-            padding: 10px 20px;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-subtle);
-            border-radius: 100px;
-            color: var(--text-secondary);
+            border: 1px solid var(--line);
+            background: #fff;
+            color: var(--muted);
+            padding: 8px 12px;
+            border-radius: 999px;
             text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            font-size: 0.84rem;
+            transition: all 0.2s ease;
         }
 
-        .tag-btn:hover, .tag-btn.active {
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            border-color: transparent;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Posts Section */
-        .posts-section {
-            margin-bottom: 60px;
+        .tag-btn.active,
+        .tag-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent-dark);
+            background: var(--tag-bg);
         }
 
         .posts-grid {
             display: grid;
-            gap: 20px;
+            gap: 14px;
         }
 
         .post-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
+            border: 1px solid var(--line);
             border-radius: 16px;
-            padding: 28px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 24px;
-        }
-
-        .post-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            background: var(--paper);
+            box-shadow: var(--shadow);
+            padding: 18px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 16px;
+            align-items: start;
+            transition: all 0.22s ease;
         }
 
         .post-card:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .post-card:hover::before {
-            opacity: 1;
-        }
-
-        .post-info {
-            flex: 1;
+            border-color: rgba(15, 118, 110, 0.35);
+            transform: translateY(-3px);
         }
 
         .post-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 12px;
+            font-size: 1.2rem;
+            line-height: 1.35;
+            margin-bottom: 10px;
         }
 
         .post-title a {
-            color: var(--text-primary);
             text-decoration: none;
-            transition: color 0.2s ease;
+            color: var(--ink);
         }
 
         .post-title a:hover {
-            color: var(--accent-primary);
+            color: var(--accent-dark);
         }
 
         .post-meta {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
+            font-size: 0.83rem;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .post-summary {
+            font-size: 0.94rem;
+            color: #2d3f4f;
             margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .post-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
         }
 
         .tag {
-            padding: 4px 10px;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-subtle);
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--text-secondary);
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 9px;
+            border-radius: 999px;
+            background: var(--tag-bg);
+            color: var(--accent-dark);
+            font-size: 0.78rem;
+            border: 1px solid rgba(15, 118, 110, 0.18);
         }
 
         .read-more {
-            padding: 12px 24px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            color: white;
             text-decoration: none;
-            border-radius: 100px;
-            font-size: 0.875rem;
+            color: #fff;
+            background: linear-gradient(120deg, var(--accent), #0e8f83);
+            border: 1px solid rgba(15, 118, 110, 0.1);
+            font-size: 0.85rem;
             font-weight: 500;
+            border-radius: 10px;
+            padding: 9px 12px;
             white-space: nowrap;
-            transition: all 0.3s ease;
+            align-self: center;
+            transition: transform 0.2s ease;
         }
 
         .read-more:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4);
+            transform: translateY(-2px);
         }
 
-        /* Footer */
-        .footer {
+        .empty-state {
+            font-size: 0.9rem;
+            color: var(--muted);
+            background: var(--paper);
+            border: 1px dashed var(--line);
+            border-radius: 12px;
+            padding: 14px;
             text-align: center;
-            padding: 60px 0;
-            border-top: 1px solid var(--border-subtle);
+            display: none;
         }
 
-        .footer-logo {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 16px;
+        .footer {
+            margin-top: 26px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.82rem;
         }
 
-        .footer p {
-            font-size: 0.8125rem;
-            color: var(--text-muted);
-        }
-
-        @media (max-width: 768px) {
-            .container { padding: 40px 24px; }
-            .header h1 { font-size: 2.5rem; }
-            .post-card {
-                flex-direction: column;
-                align-items: flex-start;
+        @media (max-width: 840px) {
+            .hero {
+                padding: 24px 20px;
             }
+
+            .post-card {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
             .read-more {
-                align-self: stretch;
-                text-align: center;
+                justify-self: start;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header class="header">
-            <div class="header-badge">
-                技术博客
-            </div>
+        <header class="hero">
+            <div class="hero-badge">NEXUS TECH JOURNAL</div>
             <h1>{{ .Site.Title }}</h1>
-            <p class="header-subtitle">{{ .Site.Params.description }}</p>
+            <p>{{ .Site.Params.description }}</p>
+            <div class="hero-actions">
+                <a class="hero-link primary" href="/posts/">查看全部文章</a>
+                <a class="hero-link" href="/gallery/">进入技术画廊</a>
+                <a class="hero-link" href="/about/">关于作者</a>
+            </div>
         </header>
 
-        <section class="tag-section">
-            <div class="section-header">
-                <div class="section-icon">🏷️</div>
-                <h2 class="section-title">标签筛选</h2>
-            </div>
+        <section class="panel">
+            <div class="panel-title">按标签筛选</div>
             <div class="tag-nav">
-                <a href="#all" class="tag-btn active" onclick="filterPosts('all')">全部文章</a>
-                {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
-                <a href="#{{ $name }}" class="tag-btn" onclick="filterPosts('{{ $name }}')">{{ $name }}</a>
+                <a href="#all" class="tag-btn active" data-tag="all" onclick="filterPosts(event, 'all')">全部</a>
+                {{ range $name, $_ := .Site.Taxonomies.tags }}
+                <a href="#{{ $name | urlize }}" class="tag-btn" data-tag="{{ $name | lower }}" onclick="filterPosts(event, '{{ $name | lower }}')">{{ $name }}</a>
                 {{ end }}
             </div>
         </section>
 
-        <section class="posts-section">
-            <div class="section-header">
-                <div class="section-icon">📚</div>
-                <h2 class="section-title">文章列表</h2>
-            </div>
-            <div class="posts-grid" id="postList">
-                {{ range .Site.RegularPages }}
-                <article class="post-card" data-tags="{{ range .Params.tags }}{{ . }} {{ end }}">
-                    <div class="post-info">
-                        <h3 class="post-title">
-                            <a href="{{ .Permalink }}">{{ .Title }}</a>
-                        </h3>
-                        <div class="post-meta">
-                            📅 {{ .Date.Format "2006年1月2日" }} | 🏷️ {{ range .Params.categories }}{{ . }}{{ end }}
-                        </div>
-                        <div class="post-tags">
-                            {{ range .Params.tags }}
-                            <span class="tag">{{ . }}</span>
-                            {{ end }}
-                        </div>
+        <section class="posts-grid" id="postList">
+            {{ range (where .Site.RegularPages "Section" "posts").ByDate.Reverse }}
+            <article class="post-card" data-tags="{{ range .Params.tags }}{{ . | lower }} {{ end }}">
+                <div>
+                    <h2 class="post-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                    <div class="post-meta">
+                        {{ .Date.Format "2006年1月2日" }}
+                        {{ if .Params.categories }} · {{ delimit .Params.categories " / " }}{{ end }}
+                        · {{ .ReadingTime }} 分钟阅读
                     </div>
-                    <a href="{{ .Permalink }}" class="read-more">阅读全文 →</a>
-                </article>
-                {{ end }}
-            </div>
+                    <p class="post-summary">{{ if .Summary }}{{ .Summary | plainify }}{{ else }}{{ .Params.description }}{{ end }}</p>
+                    <div class="post-tags">
+                        {{ range .Params.tags }}
+                        <span class="tag">{{ . }}</span>
+                        {{ end }}
+                    </div>
+                </div>
+                <a href="{{ .RelPermalink }}" class="read-more">阅读全文</a>
+            </article>
+            {{ end }}
         </section>
+
+        <p class="empty-state" id="emptyState">该标签下暂无文章。</p>
 
         <footer class="footer">
-            <div class="footer-logo">{{ .Site.Title }}</div>
-            <p>&copy; {{ now.Year }} {{ .Site.Title }}. All rights reserved.</p>
+            <p>&copy; {{ now.Year }} {{ .Site.Title }}</p>
         </footer>
     </div>
 
     <script>
-        function filterPosts(tag) {
+        function filterPosts(event, tag) {
+            if (event) {
+                event.preventDefault();
+            }
+
             const posts = document.querySelectorAll('.post-card');
             const buttons = document.querySelectorAll('.tag-btn');
-            
-            buttons.forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.getAttribute('href') === '#' + tag) {
-                    btn.classList.add('active');
+            const empty = document.getElementById('emptyState');
+            let visibleCount = 0;
+
+            buttons.forEach((button) => {
+                button.classList.toggle('active', button.dataset.tag === tag);
+            });
+
+            posts.forEach((post) => {
+                const postTags = (post.dataset.tags || '').toLowerCase();
+                const visible = tag === 'all' || postTags.includes(tag);
+                post.style.display = visible ? 'grid' : 'none';
+                if (visible) {
+                    visibleCount += 1;
                 }
             });
-            
-            posts.forEach(post => {
-                if (tag === 'all') {
-                    post.style.display = 'flex';
-                } else {
-                    const postTags = post.getAttribute('data-tags');
-                    if (postTags && postTags.includes(tag)) {
-                        post.style.display = 'flex';
-                    } else {
-                        post.style.display = 'none';
-                    }
-                }
-            });
+
+            empty.style.display = visibleCount === 0 ? 'block' : 'none';
         }
     </script>
 </body>

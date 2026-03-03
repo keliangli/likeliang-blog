@@ -4,330 +4,271 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ .Title }} | {{ .Site.Title }}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+SC:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #12121a;
-            --bg-tertiary: #1a1a24;
-            --bg-card: rgba(255, 255, 255, 0.03);
-            --text-primary: #fafafa;
-            --text-secondary: #a1a1aa;
-            --text-tertiary: #71717a;
-            --accent-primary: #6366f1;
-            --accent-secondary: #8b5cf6;
-            --accent-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            --border-subtle: rgba(255, 255, 255, 0.06);
-            --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.15);
+            --bg: #f4f6f7;
+            --panel: #ffffff;
+            --ink: #172431;
+            --muted: #5f7180;
+            --line: #d9e3e8;
+            --accent: #0f766e;
+            --accent-dark: #115e59;
+            --code-bg: #0f172a;
+            --code-text: #e2e8f0;
+            --shadow: 0 16px 44px rgba(9, 29, 45, 0.10);
         }
 
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        body { 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg-primary);
-            min-height: 100vh;
-            color: var(--text-primary);
+        body {
+            font-family: 'IBM Plex Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 10% 8%, rgba(15, 118, 110, 0.12) 0, rgba(15, 118, 110, 0) 28%),
+                radial-gradient(circle at 86% 86%, rgba(30, 64, 175, 0.08) 0, rgba(30, 64, 175, 0) 30%),
+                var(--bg);
             line-height: 1.8;
-            position: relative;
+            min-height: 100vh;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 60px 60px;
-            pointer-events: none;
-            z-index: 0;
+        .container {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 34px 16px 54px;
         }
 
-        .container { 
-            position: relative;
-            z-index: 1;
-            max-width: 900px; 
-            margin: 0 auto; 
-            padding: 40px 20px; 
-        }
-
-        .nav { 
-            margin-bottom: 40px;
-        }
-
-        .nav a { 
+        .back-link {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.95em;
-            font-weight: 500;
-            padding: 10px 18px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            color: var(--muted);
+            border: 1px solid var(--line);
+            background: #fff;
+            border-radius: 999px;
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+            transition: all 0.2s ease;
         }
 
-        .nav a:hover { 
-            color: var(--text-primary);
-            background: rgba(255,255,255,0.06);
-            border-color: rgba(255,255,255,0.12);
-            transform: translateX(-4px);
+        .back-link:hover {
+            color: var(--accent-dark);
+            border-color: rgba(15, 118, 110, 0.4);
+            transform: translateY(-1px);
         }
 
-        .article { 
-            background: var(--bg-card);
-            backdrop-filter: blur(20px);
-            border-radius: 16px;
-            padding: 50px;
-            border: 1px solid var(--border-subtle);
-            box-shadow: 0 4px 60px rgba(0,0,0,0.3);
+        .article {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 28px;
         }
 
-        .article-header { 
-            border-bottom: 1px solid var(--border-subtle);
-            padding-bottom: 35px;
-            margin-bottom: 40px;
-        }
-
-        .article-title { 
-            font-size: 2.4em;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.3;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .article-meta { 
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            font-size: 0.9em;
-            color: var(--text-secondary);
-        }
-
-        .article-meta span {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .article-content { 
-            font-size: 1.1em;
-            line-height: 1.9;
-            color: var(--text-secondary);
-        }
-
-        .article-content h2 { 
-            font-size: 1.7em;
-            font-weight: 600;
-            margin: 50px 0 25px;
-            color: var(--text-primary);
-            position: relative;
-            padding-bottom: 12px;
-        }
-
-        .article-content h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--accent-gradient);
-            border-radius: 2px;
-        }
-
-        .article-content h3 { 
-            font-size: 1.35em;
-            font-weight: 600;
-            margin: 35px 0 18px;
-            color: var(--text-primary);
-        }
-
-        .article-content p { 
+        .article-header {
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 18px;
             margin-bottom: 24px;
         }
 
-        .article-content table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            margin: 30px 0;
-            background: rgba(0,0,0,0.2);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border-subtle);
-        }
-
-        .article-content th { 
-            background: var(--accent-gradient);
-            color: white; 
-            padding: 16px; 
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.95em;
-        }
-
-        .article-content td { 
-            padding: 14px 16px; 
-            border-bottom: 1px solid var(--border-subtle);
-            color: var(--text-secondary);
-        }
-
-        .article-content tr:last-child td { border-bottom: none; }
-
-        .article-content tr:hover td {
-            background: rgba(255,255,255,0.02);
-        }
-
-        .article-content blockquote { 
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-            border-left: 3px solid var(--accent-primary);
-            padding: 24px 28px;
-            margin: 30px 0;
-            border-radius: 0 12px 12px 0;
-            font-style: italic;
-            color: var(--text-secondary);
-        }
-
-        .article-content ul, .article-content ol { 
-            margin: 24px 0;
-            padding-left: 28px;
-        }
-
-        .article-content li { 
+        .article-title {
+            font-size: clamp(1.65rem, 2.6vw, 2.4rem);
+            line-height: 1.25;
             margin-bottom: 12px;
+            color: var(--ink);
         }
 
-        .article-content a { 
-            color: var(--accent-primary);
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            color: var(--muted);
+            font-size: 0.86rem;
+        }
+
+        .meta-pill {
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 4px 9px;
+            background: #fbfdff;
+        }
+
+        .article-content {
+            color: #1f3242;
+            font-size: 1rem;
+        }
+
+        .article-content h2,
+        .article-content h3,
+        .article-content h4 {
+            line-height: 1.35;
+            margin-top: 1.8em;
+            margin-bottom: 0.7em;
+            color: #0f1720;
+        }
+
+        .article-content h2 {
+            font-size: 1.5rem;
+            border-left: 4px solid rgba(15, 118, 110, 0.45);
+            padding-left: 10px;
+        }
+
+        .article-content h3 {
+            font-size: 1.25rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1em;
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin-bottom: 1em;
+            padding-left: 1.4em;
+        }
+
+        .article-content li {
+            margin-bottom: 0.4em;
+        }
+
+        .article-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2em 0;
+            font-size: 0.92rem;
+            overflow: hidden;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+        }
+
+        .article-content th,
+        .article-content td {
+            border: 1px solid var(--line);
+            padding: 10px 12px;
+            text-align: left;
+        }
+
+        .article-content th {
+            background: #eef6f6;
+            color: #1c3448;
+            font-weight: 600;
+        }
+
+        .article-content a {
+            color: var(--accent-dark);
             text-decoration: none;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            border-bottom: 1px solid transparent;
+            border-bottom: 1px solid rgba(15, 118, 110, 0.25);
         }
 
-        .article-content a:hover { 
-            color: var(--accent-secondary);
-            border-bottom-color: var(--accent-secondary);
+        .article-content a:hover {
+            border-bottom-color: rgba(15, 118, 110, 0.6);
         }
 
-        .article-content code { 
-            background: rgba(99, 102, 241, 0.15);
-            color: var(--accent-primary);
-            padding: 3px 10px;
+        .article-content blockquote {
+            border-left: 4px solid rgba(15, 118, 110, 0.45);
+            background: #f2faf8;
+            margin: 1.2em 0;
+            padding: 10px 14px;
+            color: #2a475d;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .article-content code {
+            font-family: 'IBM Plex Mono', 'JetBrains Mono', monospace;
+            font-size: 0.88em;
+            padding: 0.1em 0.4em;
             border-radius: 6px;
-            font-family: 'JetBrains Mono', 'Fira Code', monospace;
-            font-size: 0.9em;
-            font-weight: 500;
+            background: #ecf3f8;
+            color: #0f3f65;
         }
 
-        .article-content pre { 
-            background: var(--bg-secondary);
-            padding: 24px;
+        .article-content pre {
+            background: var(--code-bg);
+            color: var(--code-text);
             border-radius: 12px;
+            padding: 14px;
+            margin: 1.2em 0;
             overflow-x: auto;
-            margin: 24px 0;
-            border: 1px solid var(--border-subtle);
         }
 
-        .article-content pre code { 
-            background: none;
+        .article-content pre code {
+            background: transparent;
+            color: inherit;
             padding: 0;
-            color: var(--text-secondary);
-            font-size: 0.9em;
-            line-height: 1.7;
         }
 
-        .article-tags { 
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 1px solid var(--border-subtle);
+        .article-tags {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
         }
 
         .article-tags strong {
-            color: var(--text-secondary);
-            font-weight: 500;
-            margin-right: 12px;
+            font-size: 0.88rem;
+            color: var(--muted);
+            margin-right: 4px;
         }
 
-        .tag { 
-            display: inline-block; 
-            background: rgba(99, 102, 241, 0.15);
-            color: var(--accent-primary); 
-            padding: 8px 16px; 
-            border-radius: 20px; 
-            font-size: 0.85em; 
-            font-weight: 500;
-            margin-right: 10px;
-            margin-bottom: 8px;
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            transition: all 0.3s ease;
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            background: #e7f5f3;
+            color: var(--accent-dark);
+            border: 1px solid rgba(15, 118, 110, 0.2);
+            font-size: 0.78rem;
+            padding: 4px 10px;
         }
 
-        .tag:hover {
-            background: rgba(99, 102, 241, 0.25);
-            transform: translateY(-2px);
+        .comments {
+            margin-top: 26px;
+            padding-top: 18px;
+            border-top: 1px solid var(--line);
         }
 
-        .footer { 
-            text-align: center; 
-            padding: 50px 40px;
-            margin-top: 60px;
-            color: var(--text-tertiary);
-            font-size: 0.9em;
+        .footer {
+            text-align: center;
+            margin-top: 18px;
+            color: var(--muted);
+            font-size: 0.82rem;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px 16px;
+        @media (max-width: 740px) {
+            .article {
+                padding: 18px;
+                border-radius: 14px;
             }
-            .article { 
-                padding: 28px; 
-                border-radius: 12px;
-            }
-            .article-title { 
-                font-size: 1.8em; 
-            }
-            .article-content { 
-                font-size: 1em; 
-            }
-            .article-content h2 {
-                font-size: 1.4em;
-            }
+
             .article-meta {
-                gap: 12px;
+                gap: 6px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <nav class="nav">
-            <a href="/">← 返回首页</a>
-        </nav>
+        <a href="/" class="back-link">返回首页</a>
 
         <article class="article">
             <header class="article-header">
                 <h1 class="article-title">{{ .Title }}</h1>
                 <div class="article-meta">
-                    <span>📅 {{ .Date.Format "2006年1月2日" }}</span>
-                    <span>🏷️ {{ range .Params.categories }}{{ . }}{{ end }}</span>
-                    {{ if .Params.author }}<span>✍️ {{ .Params.author }}</span>{{ end }}
+                    <span class="meta-pill">{{ .Date.Format "2006年1月2日" }}</span>
+                    {{ if .Params.categories }}<span class="meta-pill">{{ delimit .Params.categories " / " }}</span>{{ end }}
+                    {{ if .Params.author }}<span class="meta-pill">{{ .Params.author }}</span>{{ end }}
+                    <span class="meta-pill">{{ .ReadingTime }} 分钟阅读</span>
                 </div>
             </header>
 
@@ -337,17 +278,21 @@
 
             {{ if .Params.tags }}
             <div class="article-tags">
-                <strong>标签：</strong>
+                <strong>标签</strong>
                 {{ range .Params.tags }}
                 <span class="tag">{{ . }}</span>
                 {{ end }}
             </div>
             {{ end }}
+
+            <div class="comments">
+                {{ partial "giscus.html" . }}
+            </div>
         </article>
 
-        <div class="footer">
-            <p>&copy; {{ now.Year }} {{ .Site.Title }}. All rights reserved.</p>
-        </div>
+        <footer class="footer">
+            <p>&copy; {{ now.Year }} {{ .Site.Title }}</p>
+        </footer>
     </div>
 </body>
 </html>

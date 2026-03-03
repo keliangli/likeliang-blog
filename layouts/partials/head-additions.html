@@ -1,257 +1,61 @@
-<!-- 自定义CSS - 优化排版和信息密度 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+SC:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
-  /* 基础样式优化 - 减小字体，增加密度 */
+  :root {
+    --nexus-accent: #0f766e;
+    --nexus-accent-soft: #e8f5f3;
+    --nexus-border-soft: #d8e3e8;
+    --nexus-text-soft: #5f7180;
+  }
+
   body {
-    background-color: #0a0a0f;
-    color: #e0e0e0;
-    font-size: 14px;
-    line-height: 1.6;
+    font-family: 'IBM Plex Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    line-height: 1.75;
   }
-  
-  .bg-near-black {
-    background-color: #12121a;
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    letter-spacing: 0.01em;
   }
-  
-  /* 链接样式 */
-  a {
-    color: #00f0ff;
-    transition: all 0.3s ease;
+
+  .prose a {
+    color: var(--nexus-accent);
+    text-decoration-color: rgba(15, 118, 110, 0.35);
   }
-  
-  a:hover {
-    color: #7b2dff;
-    text-decoration: none;
+
+  .prose a:hover {
+    text-decoration-color: rgba(15, 118, 110, 0.65);
   }
-  
-  /* 标题样式 - 减小字号 */
-  h1 {
-    font-size: 1.8rem;
-    color: #ffffff;
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    margin-bottom: 0.8rem;
+
+  .prose blockquote {
+    border-inline-start-width: 4px;
+    border-inline-start-color: rgba(15, 118, 110, 0.45);
+    background: var(--nexus-accent-soft);
+    border-radius: 0 8px 8px 0;
   }
-  
-  h2 {
-    font-size: 1.4rem;
-    color: #ffffff;
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    margin-top: 1.5rem;
-    margin-bottom: 0.6rem;
-    border-bottom: 1px solid #2a2a3a;
-    padding-bottom: 0.4rem;
+
+  .prose code {
+    font-family: 'IBM Plex Mono', 'JetBrains Mono', monospace;
+    font-size: 0.9em;
   }
-  
-  h3 {
-    font-size: 1.15rem;
-    color: #e0e0e0;
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    margin-top: 1.2rem;
-    margin-bottom: 0.5rem;
+
+  .giscus-comments {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--nexus-border-soft);
   }
-  
-  h4, h5, h6 {
-    font-size: 1rem;
-    color: #e0e0e0;
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    margin-top: 1rem;
-    margin-bottom: 0.4rem;
+
+  .article-meta,
+  .post-meta {
+    color: var(--nexus-text-soft);
   }
-  
-  /* 段落样式 - 减小间距 */
-  p {
-    margin-bottom: 0.8rem;
-    text-align: justify;
-  }
-  
-  /* 代码块样式 */
-  pre {
-    background-color: #1a1a25;
-    border: 1px solid #2a2a3a;
-    border-radius: 6px;
-    padding: 0.8rem;
-    overflow-x: auto;
-    font-size: 0.85rem;
-    margin: 0.8rem 0;
-  }
-  
-  code {
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    background-color: rgba(0, 240, 255, 0.1);
-    color: #00f0ff;
-    padding: 0.15rem 0.3rem;
-    border-radius: 3px;
-    font-size: 0.85em;
-  }
-  
-  pre code {
-    background-color: transparent;
-    color: #e0e0e0;
-    padding: 0;
-    font-size: 0.85rem;
-  }
-  
-  /* 列表样式 - 减小间距 */
-  ul, ol {
-    margin-bottom: 0.8rem;
-    padding-left: 1.5rem;
-  }
-  
-  li {
-    margin-bottom: 0.3rem;
-  }
-  
-  /* 表格样式 - 紧凑 */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 0.8rem 0;
-    font-size: 0.9rem;
-  }
-  
-  th, td {
-    padding: 0.5rem 0.6rem;
-    border: 1px solid #2a2a3a;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #1a1a25;
-    font-weight: 600;
-    color: #00f0ff;
-  }
-  
-  tr:nth-child(even) {
-    background-color: rgba(26, 26, 37, 0.5);
-  }
-  
-  /* 引用块样式 */
-  blockquote {
-    border-left: 3px solid #00f0ff;
-    margin: 0.8rem 0;
-    padding: 0.5rem 1rem;
-    background-color: rgba(0, 240, 255, 0.05);
-    font-style: italic;
-  }
-  
-  /* 文章卡片样式 - 紧凑 */
-  .db {
-    margin-bottom: 1rem;
-  }
-  
-  .ph3 {
-    padding-left: 0.8rem;
-    padding-right: 0.8rem;
-  }
-  
-  .pv4 {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-  }
-  
-  /* 文章标题链接 */
-  .f3 {
-    font-size: 1.2rem;
-  }
-  
-  .f5 {
-    font-size: 0.9rem;
-  }
-  
-  .f6 {
-    font-size: 0.8rem;
-  }
-  
-  /* 标签样式 */
-  .tag {
-    display: inline-block;
-    background-color: rgba(0, 240, 255, 0.1);
-    color: #00f0ff;
-    padding: 0.15rem 0.5rem;
-    border-radius: 3px;
-    font-size: 0.75rem;
-    margin-right: 0.3rem;
-    margin-bottom: 0.3rem;
-    border: 1px solid rgba(0, 240, 255, 0.3);
-  }
-  
-  /* 分类样式 */
+
+  .tag,
   .category {
-    display: inline-block;
-    background-color: rgba(123, 45, 255, 0.1);
-    color: #7b2dff;
-    padding: 0.2rem 0.6rem;
-    border-radius: 3px;
-    font-size: 0.8rem;
-    margin-right: 0.4rem;
-    border: 1px solid rgba(123, 45, 255, 0.3);
-  }
-  
-  /* 分隔线 */
-  hr {
-    border: none;
-    border-top: 1px solid #2a2a3a;
-    margin: 1.5rem 0;
-  }
-  
-  /* 导航栏优化 */
-  nav {
-    font-size: 0.9rem;
-  }
-  
-  /* 页脚优化 */
-  footer {
-    font-size: 0.85rem;
-  }
-  
-  /* 阅读更多按钮 */
-  .ba {
-    border: 1px solid #00f0ff;
-  }
-  
-  .b--light-silver {
-    border-color: #00f0ff;
-  }
-  
-  /* 文章内容区域 */
-  .measure-wide {
-    max-width: 75ch;
-  }
-  
-  .lh-copy {
-    line-height: 1.6;
-  }
-  
-  /* 摘要文字 */
-  .nested-links {
-    font-size: 0.9rem;
-  }
-  
-  /* 首页文章列表 */
-  .flex-wrap article {
-    margin-bottom: 1rem;
-  }
-  
-  /* 响应式调整 */
-  @media (max-width: 768px) {
-    body {
-      font-size: 13px;
-    }
-    
-    h1 {
-      font-size: 1.5rem;
-    }
-    
-    h2 {
-      font-size: 1.2rem;
-    }
-    
-    h3 {
-      font-size: 1.05rem;
-    }
-    
-    .ph3 {
-      padding-left: 0.6rem;
-      padding-right: 0.6rem;
-    }
+    border-radius: 999px;
   }
 </style>

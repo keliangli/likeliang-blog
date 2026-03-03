@@ -25,9 +25,9 @@ featured_image = ''
 
 ### 联系方式
 
-- GitHub: [yourusername](https://github.com/yourusername)
-- Twitter: [@yourusername](https://twitter.com/yourusername)
-- Email: your.email@example.com
+- GitHub: [keliangli](https://github.com/keliangli)
+- 博客仓库: [likeliang-blog](https://github.com/keliangli/likeliang-blog)
+- 联系方式: 通过 GitHub Issues 或 Discussions 留言
 
 ---
 
