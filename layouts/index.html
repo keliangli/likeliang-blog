@@ -125,6 +125,74 @@
             margin-bottom: 12px;
         }
 
+        .panel-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .panel-more {
+            text-decoration: none;
+            font-size: 0.82rem;
+            color: var(--accent-dark);
+            border: 1px solid rgba(15, 118, 110, 0.25);
+            border-radius: 999px;
+            padding: 4px 10px;
+            background: var(--tag-bg);
+            transition: all 0.2s ease;
+        }
+
+        .panel-more:hover {
+            transform: translateY(-1px);
+            border-color: var(--accent);
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+        }
+
+        .news-card {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: #fff;
+            padding: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .news-card:hover {
+            border-color: rgba(15, 118, 110, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .news-title {
+            font-size: 0.95rem;
+            line-height: 1.45;
+            margin-bottom: 6px;
+        }
+
+        .news-title a {
+            color: var(--ink);
+            text-decoration: none;
+        }
+
+        .news-title a:hover {
+            color: var(--accent-dark);
+        }
+
+        .news-meta {
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+
+        .news-empty {
+            font-size: 0.86rem;
+            color: var(--muted);
+        }
+
         .tag-nav {
             display: flex;
             flex-wrap: wrap;
@@ -280,6 +348,9 @@
             <p>{{ .Site.Params.description }}</p>
             <div class="hero-actions">
                 <a class="hero-link primary" href="{{ "posts/" | relURL }}">查看全部文章</a>
+                {{ with .Site.GetPage "/tech-news" }}
+                <a class="hero-link" href="{{ .RelPermalink }}">技术新闻</a>
+                {{ end }}
                 {{ with .Site.GetPage "/gallery" }}
                 <a class="hero-link" href="{{ .RelPermalink }}">进入技术画廊</a>
                 {{ end }}
@@ -288,6 +359,28 @@
                 {{ end }}
             </div>
         </header>
+
+        {{ $newsPages := (where .Site.RegularPages "Section" "tech-news").ByDate.Reverse }}
+        <section class="panel">
+            <div class="panel-head">
+                <div class="panel-title">技术新闻</div>
+                {{ with .Site.GetPage "/tech-news" }}
+                <a class="panel-more" href="{{ .RelPermalink }}">查看全部</a>
+                {{ end }}
+            </div>
+            {{ if gt (len $newsPages) 0 }}
+            <div class="news-grid">
+                {{ range first 4 $newsPages }}
+                <article class="news-card">
+                    <h3 class="news-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                    <p class="news-meta">{{ .Date.Format "2006年1月2日" }} · {{ .ReadingTime }} 分钟阅读</p>
+                </article>
+                {{ end }}
+            </div>
+            {{ else }}
+            <p class="news-empty">暂无技术新闻，运行本地智能体后将自动出现。</p>
+            {{ end }}
+        </section>
 
         <section class="panel">
             <div class="panel-title">按标签筛选</div>
@@ -309,7 +402,9 @@
                         {{ if .Params.categories }} · {{ delimit .Params.categories " / " }}{{ end }}
                         · {{ .ReadingTime }} 分钟阅读
                     </div>
-                    <p class="post-summary">{{ if .Summary }}{{ .Summary | plainify }}{{ else }}{{ .Params.description }}{{ end }}</p>
+                    {{ $summary := .Params.description }}
+                    {{ if not $summary }}{{ $summary = (.Summary | plainify | truncate 120) }}{{ end }}
+                    <p class="post-summary">{{ $summary }}</p>
                     <div class="post-tags">
                         {{ range .Params.tags }}
                         <span class="tag">{{ . }}</span>

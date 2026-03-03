@@ -1,0 +1,39 @@
+﻿{
+  "post": {
+    "titlePrefix": "技术新闻",
+    "author": "keliangli Agent",
+    "category": "技术新闻",
+    "tags": [
+      "技术新闻",
+      "GitHub热点",
+      "大模型",
+      "模型推理",
+      "智能体",
+      "模型训练"
+    ]
+  },
+  "topics": [
+    {
+      "name": "大模型",
+      "queryTemplate": "llm OR \"large language model\" OR qwen OR llama OR deepseek stars:>=1000 pushed:>={since} archived:false"
+    },
+    {
+      "name": "大模型推理技术",
+      "queryTemplate": "vllm OR sglang OR llama.cpp OR text-generation-inference OR tensorrt-llm stars:>=300 pushed:>={since} archived:false"
+    },
+    {
+      "name": "智能体技术",
+      "queryTemplate": "\"agent framework\" OR agentic OR \"multi-agent\" OR \"autonomous agent\" stars:>=50 pushed:>={since} archived:false"
+    },
+    {
+      "name": "大模型训练技术",
+      "queryTemplate": "deepspeed OR unsloth OR axolotl OR peft OR trl stars:>=30 pushed:>={since} archived:false"
+    }
+  ]
+}
+
+
+
+
+
+
