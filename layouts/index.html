@@ -279,9 +279,13 @@
             <h1>{{ .Site.Title }}</h1>
             <p>{{ .Site.Params.description }}</p>
             <div class="hero-actions">
-                <a class="hero-link primary" href="/posts/">查看全部文章</a>
-                <a class="hero-link" href="/gallery/">进入技术画廊</a>
-                <a class="hero-link" href="/about/">关于作者</a>
+                <a class="hero-link primary" href="{{ "posts/" | relURL }}">查看全部文章</a>
+                {{ with .Site.GetPage "/gallery" }}
+                <a class="hero-link" href="{{ .RelPermalink }}">进入技术画廊</a>
+                {{ end }}
+                {{ with .Site.GetPage "/about" }}
+                <a class="hero-link" href="{{ .RelPermalink }}">关于作者</a>
+                {{ end }}
             </div>
         </header>
 
